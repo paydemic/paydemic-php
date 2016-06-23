@@ -54,7 +54,7 @@ class HttpClientBasedOnGuzzle implements HttpClientInterface
                 },
                 function (RequestException $e) use ($method, $path, $options) {
                     $httpException = new HttpException(
-                        "PaydemicPhpSdk.HttpException: " . $e->getMessage(),
+                        "Paydemic.Internal.HttpException: " . $e->getMessage(),
                         $e->getCode(),
                         $e,
                         $method,
