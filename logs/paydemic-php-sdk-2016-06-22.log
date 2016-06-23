@@ -1,0 +1,169 @@
+[33m[2016-06-22 14:06:22] PaydemicPhpSdk.Main.WARNING: Houston, we've got a problem![0m
+[31m[2016-06-22 14:06:22] PaydemicPhpSdk.Main.ERROR: exception 'GuzzleHttp\Exception\ConnectException' with message 'cURL error 6: Could not resolve host: accountX.devdemic.com (see http://curl.haxx.se/libcurl/c/libcurl-errors.html)' in /Users/ogg/ws/github/paydemic-php/vendor/guzzlehttp/guzzle/src/Handler/CurlFactory.php:186
+Stack trace:
+#0 /Users/ogg/ws/github/paydemic-php/vendor/guzzlehttp/guzzle/src/Handler/CurlFactory.php(150): GuzzleHttp\Handler\CurlFactory::createRejection(Object(GuzzleHttp\Handler\EasyHandle), Array)
+#1 /Users/ogg/ws/github/paydemic-php/vendor/guzzlehttp/guzzle/src/Handler/CurlFactory.php(103): GuzzleHttp\Handler\CurlFactory::finishError(Object(GuzzleHttp\Handler\CurlHandler), Object(GuzzleHttp\Handler\EasyHandle), Object(GuzzleHttp\Handler\CurlFactory))
+#2 /Users/ogg/ws/github/paydemic-php/vendor/guzzlehttp/guzzle/src/Handler/CurlHandler.php(43): GuzzleHttp\Handler\CurlFactory::finish(Object(GuzzleHttp\Handler\CurlHandler), Object(GuzzleHttp\Handler\EasyHandle), Object(GuzzleHttp\Handler\CurlFactory))
+#3 /Users/ogg/ws/github/paydemic-php/vendor/guzzlehttp/guzzle/src/PrepareBodyMiddleware.php(72): GuzzleHttp\Handler\CurlHandler->__invoke(Object(GuzzleHttp\Psr7\Request), Array)
+#4 /Users/ogg/ws/github/paydemic-php/vendor/guzzlehttp/guzzle/src/Middleware.php(30): GuzzleHttp\PrepareBodyMiddleware->__invoke(Object(GuzzleHttp\Psr7\Request), Array)
+#5 /Users/ogg/ws/github/paydemic-php/vendor/guzzlehttp/guzzle/src/RedirectMiddleware.php(68): GuzzleHttp\Middleware::GuzzleHttp\{closure}(Object(GuzzleHttp\Psr7\Request), Array)
+#6 /Users/ogg/ws/github/paydemic-php/vendor/guzzlehttp/guzzle/src/Middleware.php(59): GuzzleHttp\RedirectMiddleware->__invoke(Object(GuzzleHttp\Psr7\Request), Array)
+#7 /Users/ogg/ws/github/paydemic-php/vendor/guzzlehttp/guzzle/src/HandlerStack.php(67): GuzzleHttp\Middleware::GuzzleHttp\{closure}(Object(GuzzleHttp\Psr7\Request), Array)
+#8 /Users/ogg/ws/github/paydemic-php/vendor/guzzlehttp/guzzle/src/Client.php(268): GuzzleHttp\HandlerStack->__invoke(Object(GuzzleHttp\Psr7\Request), Array)
+#9 /Users/ogg/ws/github/paydemic-php/vendor/guzzlehttp/guzzle/src/Client.php(123): GuzzleHttp\Client->transfer(Object(GuzzleHttp\Psr7\Request), Array)
+#10 /Users/ogg/ws/github/paydemic-php/src/HttpClient/HttpClientBasedOnGuzzle.php(42): GuzzleHttp\Client->requestAsync('POST', '/authentication...', Array)
+#11 /Users/ogg/ws/github/paydemic-php/src/Authenticator.php(38): Paydemic\PaydemicPhpSdk\HttpClient\HttpClientBasedOnGuzzle->request('POST', '/authentication...', Array)
+#12 /Users/ogg/ws/github/paydemic-php/src/PaydemicPhpSdk.php(33): Paydemic\PaydemicPhpSdk\Authenticator->refreshTemporaryCredentials()
+#13 /Users/ogg/ws/github/paydemic-php/tests/PaydemicPhpSdkTest.php(45): Paydemic\PaydemicPhpSdk\PaydemicPhpSdk->bla()
+#14 [internal function]: Paydemic\PaydemicPhpSdk\PaydemicPhpSdkTest->testBla()
+#15 /Users/ogg/ws/github/paydemic-php/vendor/phpunit/phpunit/src/Framework/TestCase.php(909): ReflectionMethod->invokeArgs(Object(Paydemic\PaydemicPhpSdk\PaydemicPhpSdkTest), Array)
+#16 /Users/ogg/ws/github/paydemic-php/vendor/phpunit/phpunit/src/Framework/TestCase.php(768): PHPUnit_Framework_TestCase->runTest()
+#17 /Users/ogg/ws/github/paydemic-php/vendor/phpunit/phpunit/src/Framework/TestResult.php(612): PHPUnit_Framework_TestCase->runBare()
+#18 /Users/ogg/ws/github/paydemic-php/vendor/phpunit/phpunit/src/Framework/TestCase.php(724): PHPUnit_Framework_TestResult->run(Object(Paydemic\PaydemicPhpSdk\PaydemicPhpSdkTest))
+#19 /Users/ogg/ws/github/paydemic-php/vendor/phpunit/phpunit/src/Framework/TestSuite.php(747): PHPUnit_Framework_TestCase->run(Object(PHPUnit_Framework_TestResult))
+#20 /Users/ogg/ws/github/paydemic-php/vendor/phpunit/phpunit/src/Framework/TestSuite.php(747): PHPUnit_Framework_TestSuite->run(Object(PHPUnit_Framework_TestResult))
+#21 /Users/ogg/ws/github/paydemic-php/vendor/phpunit/phpunit/src/TextUI/TestRunner.php(440): PHPUnit_Framework_TestSuite->run(Object(PHPUnit_Framework_TestResult))
+#22 /Users/ogg/ws/github/paydemic-php/vendor/phpunit/phpunit/src/TextUI/Command.php(149): PHPUnit_TextUI_TestRunner->doRun(Object(PHPUnit_Framework_TestSuite), Array)
+#23 /Users/ogg/ws/github/paydemic-php/vendor/phpunit/phpunit/src/TextUI/Command.php(100): PHPUnit_TextUI_Command->run(Array, true)
+#24 /Users/ogg/ws/github/paydemic-php/vendor/phpunit/phpunit/phpunit(47): PHPUnit_TextUI_Command::main()
+#25 {main}
+
+Next exception 'Paydemic\PaydemicPhpSdk\HttpClient\HttpException' with message 'PaydemicPhpSdk.HttpException: cURL error 6: Could not resolve host: accountX.devdemic.com (see http://curl.haxx.se/libcurl/c/libcurl-errors.html)' in /Users/ogg/ws/github/paydemic-php/src/HttpClient/HttpClientBasedOnGuzzle.php:55
+Stack trace:
+#0 /Users/ogg/ws/github/paydemic-php/vendor/guzzlehttp/promises/src/RejectedPromise.php(40): Paydemic\PaydemicPhpSdk\HttpClient\HttpClientBasedOnGuzzle->Paydemic\PaydemicPhpSdk\HttpClient\{closure}(Object(GuzzleHttp\Exception\ConnectException))
+#1 /Users/ogg/ws/github/paydemic-php/vendor/guzzlehttp/promises/src/TaskQueue.php(61): GuzzleHttp\Promise\RejectedPromise::GuzzleHttp\Promise\{closure}()
+#2 /Users/ogg/ws/github/paydemic-php/vendor/guzzlehttp/promises/src/TaskQueue.php(26): GuzzleHttp\Promise\TaskQueue->run()
+#3 [internal function]: GuzzleHttp\Promise\TaskQueue->GuzzleHttp\Promise\{closure}()
+#4 {main}[0m
+[32m[2016-06-22 14:06:22] PaydemicPhpSdk.Main.INFO: Http method of the request: POST[0m
+[37;101m[2016-06-22 14:06:22] PaydemicPhpSdk.Main.ALERT: Http method of the request: POST[0m
+[101m[5m[37m[2016-06-22 14:06:22] PaydemicPhpSdk.Main.EMERGENCY: Http method of the request: POST[0m
+[32m[2016-06-22 14:07:49] PaydemicPhpSdk.Main.INFO: refreshTemporaryCredentials response code: 200 OK[0m
+[32m[2016-06-22 14:07:49] PaydemicPhpSdk.Main.INFO: refreshTemporaryCredentials response body:[0m
+[32m[2016-06-22 14:07:49] PaydemicPhpSdk.Main.INFO: {"accessKeyId":"ASIAJMM33FPTXSLVND7A","secretAccessKey":"37uPI7lgZbwK/50VfIymOjFyS7NMnEEZnpbgIZrg","sessionToken":"FQoDYXdzEEcaDHRuXjOkesFV0CQF6CLRBOq3G2ZdA7kemKgXvbDGditF0rHaoM4bTpUwqcB733/YPD+Vb/wcshZ2eOfvsGpth2iO7ASfwBqq6SjQxwt4gz4aDPDdXByfDZ1FhVCdvr8MN3iqkU5KhD5NKnNzzX2Qlk1OfixMq8HI3O/zQQnqqQWeEMZSWhJimabhxgB6f0fqhfKC6pqTtR7OCeK8spQFt/1tDZrqMGi9KYWDzxscD94f4DWGsuxnzd14yDvLJo9vRC5eUoQIBVEC+H+gUUdY9/dxuGLFjBT0Ia55hFxOLXBJ8803HBSI1Ny48WvOlt9V9c2UorOmnGTmPGDicKqjSQ8tqMjsmOZ8gXhMMsmrH7MaxnxQ+kCTz6Y9Wx5uIFcGYJZRHB0vinRl1IuEA4wrA9SZuqHaKzDvvx7qfnjQADD9lKOpCbLeAx1ZmmhJ9F4KdsiQ60+jjhXxg67elglUxgHTo9FJioqFq9Ke/+cQsLl2FSlgwqW0GuwtHXRgPkvN042cle4z1ldoPNaEw2e6JOXtKEbeTF7x5Y7wReaKkXEtjJv3I5c0xqSP/3P8hYMcGQJZOKl9ROadQFG/tKwcW785NDLl5hreN8VXcr4BlFfdfFWvPUu14qQD1hzt2r8rKZGWtvmfziduiNRce4Kei3bJQQWyPDGaX4SQpVanFIA5d1oii3zNWt77IlPfjgbNlt7a0VQZqtYxl91M2RDdnE9LAAS2t6RVgQP66DmttRJB2UYyqp0BWa1xh3aNAMPZ2WbhJMEg0N4crUPyTu1byF7xRL/m40ws3Crxp9rjS+OuKLW3qrsF","expiration":"2016-06-22T15:07:49.000Z"}[0m
+[32m[2016-06-22 14:19:27] PaydemicPhpSdk.Main.INFO: refreshTemporaryCredentials response code: 200 OK[0m
+[32m[2016-06-22 14:19:27] PaydemicPhpSdk.Main.INFO: refreshTemporaryCredentials response body:[0m
+[32m[2016-06-22 14:19:27] PaydemicPhpSdk.Main.INFO: {"accessKeyId":"ASIAJYHSUXAVDSJFR2PA","secretAccessKey":"BC4VNH2EnRXqMAlHY0UKHyCcqYk43yqieDGwqFff","sessionToken":"FQoDYXdzEEcaDBs546QmNTrZ54cmWyLRBP9TOAu0BaMwcYXXHoNDRRlgIfWGrnU5YxKuuhNPZfuE4LH7ZjsQwtRd4zVlQxvjMlrsQd1DEHZgPtsq/SxsrhFud2Nz6QGpRU85vqZF37GuUUbmyliXcDtdmdpBplALa5n2/QBR0Yck75ntmDNYQulf3ADdOLFsMCm42u4khutgiz07FFZnq4g3jQfRS1dXxXphrcGAtpg2cEajX8dire/3oYPWsUFlcC93/TAoHDN1cO8MHvRmBHTI1xiVeRJxfbjaqMkJMXwamE9PQnXI+usF6/obNLXvupiftDnwr3ZyeRKx07uQp4ekTFXSFi3nTRnURb3wGauXdz7YBQZaKmh0oybGJy2TOhRmhwwSNHNmnRnU4rVhqC3SyuwqbwqrLjDNG6/GZhmlwQVCnThzJhfz6MYXrEGezFSPMIlw+e+C4dE69tkkJaS1mw9sHB/j2O4igtZEDS79Lm8jyp2+CT6lUK7tiAQ631a9vG3OwpaDtnn5WmBsicaOCNKnI57SqRRuQ1rG+HBhDuncyfZP+DFWWPsDSFPErTLCqFJjWDC8h7f4DdvAbtkcVLeHHaiqX1cLvRps/+GrHYCx/+Za2c/Wio0e6X0AhA5M2XnOssWSn33QWcMI2m46D6HwBBS+NnRmhS4bfwbiDaeIlLcoJ2uMCS2jDfIWSxX09VN0ac9ev5+hJrsVcJUYRWjj+JcupnyivCu/p5AtNbhek/KXyZrdZFfN4fbFFgf7xfJieko14hct8wyNaK9uvdrN1rRhqtzBhGvMA2sk5JFjWVldKC1rKPC8qrsF","expiration":"2016-06-22T15:19:28.000Z"}[0m
+[32m[2016-06-22 20:26:16] PaydemicPhpSdk.Main.INFO: refreshTemporaryCredentials response code: 200 OK[0m
+[32m[2016-06-22 20:26:16] PaydemicPhpSdk.Main.INFO: refreshTemporaryCredentials response body:[0m
+[32m[2016-06-22 20:26:16] PaydemicPhpSdk.Main.INFO: {"accessKeyId":"ASIAJSXJEMRJHOA7CAFQ","secretAccessKey":"dYwbabzMnLlIS6/g1XHsipmvNKk3/kqCiBt5iVl/","sessionToken":"FQoDYXdzEE4aDBEYRp1kaGtxHS/7KiLRBBetofeuG0GpREYxR7QmT82JFyTKwfyhq00EjYz4NObFPl1V8IQm3x+NUWjfgv3AXxbTJrw5XSCMX/e1+hPus9DEOrCI2C8I04yO7vu74jjhDWO0pLohN4izTPyLMCyyhKP92//WHti00S+4Dp5izEocFynkeQgrgOG9H9AoLjtO4/oRS5xCN4Fto+Tv90OkS5p85cXu/BsBzqgoT4+wMA6C7eR56KeutxuPKNta/DwOAooBYUWOktH+yoC/OSkWeSkvrgTHWKYmRlG6Oc+Vxj2j/A0reyjNNZVNh47l7yXPlZJzsLJxFWfGH264Pag6Ku0zSDXzrJ7hNhfOfkIb0KzCJJj4czWLxFirWxSBsdbFAUhBsCMf9vrvcPvKBV+8t7seKSCgn1uRaUT5abp9XKg4IuotT2Y4v8uqE6WrYozaBaEd75IjiRmVRoi7zlk/lu8xDKyLuYiiFb9z16CSNcvwgYBzG6ZUfB6vGMOPMGGjhjycbA/dZ1CKdpj8TQO2/B9/K7KnzyT9gZTgAlEkxSaYehG6ScNIenq1zA73ufif4srDSbdvnUJ4P2ol7aOCYqRVNTUCWHnRUCib2EWXE4hCbhDgd2nkuHHCk7KhmOrwLSVXQjK4H7Od+QPEB5e/y1MiAzJsgjtwl9zLxX/lCeqkje3WIj3AyA+D/xd0AK1SHiD9ZftR5AOuV0K8fbZxr/Jk4B5BJI2z4bCtBjwnd4wj9pCM0b1UAvKP/vEAYWXF5+T7EFiEjecJP72CqO3UtpL8enDLN7/2mirbYOfH2JI0KOjoq7sF","expiration":"2016-06-22T21:26:16.000Z"}[0m
+[33m[2016-06-22 20:26:30] PaydemicPhpSdk.Main.WARNING: Houston, we've got a problem![0m
+[31m[2016-06-22 20:26:30] PaydemicPhpSdk.Main.ERROR: exception 'GuzzleHttp\Exception\ConnectException' with message 'cURL error 6: Could not resolve host: accountX.devdemic.com (see http://curl.haxx.se/libcurl/c/libcurl-errors.html)' in /Users/ogg/ws/github/paydemic-php/vendor/guzzlehttp/guzzle/src/Handler/CurlFactory.php:186
+Stack trace:
+#0 /Users/ogg/ws/github/paydemic-php/vendor/guzzlehttp/guzzle/src/Handler/CurlFactory.php(150): GuzzleHttp\Handler\CurlFactory::createRejection(Object(GuzzleHttp\Handler\EasyHandle), Array)
+#1 /Users/ogg/ws/github/paydemic-php/vendor/guzzlehttp/guzzle/src/Handler/CurlFactory.php(103): GuzzleHttp\Handler\CurlFactory::finishError(Object(GuzzleHttp\Handler\CurlHandler), Object(GuzzleHttp\Handler\EasyHandle), Object(GuzzleHttp\Handler\CurlFactory))
+#2 /Users/ogg/ws/github/paydemic-php/vendor/guzzlehttp/guzzle/src/Handler/CurlHandler.php(43): GuzzleHttp\Handler\CurlFactory::finish(Object(GuzzleHttp\Handler\CurlHandler), Object(GuzzleHttp\Handler\EasyHandle), Object(GuzzleHttp\Handler\CurlFactory))
+#3 /Users/ogg/ws/github/paydemic-php/vendor/guzzlehttp/guzzle/src/PrepareBodyMiddleware.php(72): GuzzleHttp\Handler\CurlHandler->__invoke(Object(GuzzleHttp\Psr7\Request), Array)
+#4 /Users/ogg/ws/github/paydemic-php/vendor/guzzlehttp/guzzle/src/Middleware.php(30): GuzzleHttp\PrepareBodyMiddleware->__invoke(Object(GuzzleHttp\Psr7\Request), Array)
+#5 /Users/ogg/ws/github/paydemic-php/vendor/guzzlehttp/guzzle/src/RedirectMiddleware.php(68): GuzzleHttp\Middleware::GuzzleHttp\{closure}(Object(GuzzleHttp\Psr7\Request), Array)
+#6 /Users/ogg/ws/github/paydemic-php/vendor/guzzlehttp/guzzle/src/Middleware.php(59): GuzzleHttp\RedirectMiddleware->__invoke(Object(GuzzleHttp\Psr7\Request), Array)
+#7 /Users/ogg/ws/github/paydemic-php/vendor/guzzlehttp/guzzle/src/HandlerStack.php(67): GuzzleHttp\Middleware::GuzzleHttp\{closure}(Object(GuzzleHttp\Psr7\Request), Array)
+#8 /Users/ogg/ws/github/paydemic-php/vendor/guzzlehttp/guzzle/src/Client.php(268): GuzzleHttp\HandlerStack->__invoke(Object(GuzzleHttp\Psr7\Request), Array)
+#9 /Users/ogg/ws/github/paydemic-php/vendor/guzzlehttp/guzzle/src/Client.php(123): GuzzleHttp\Client->transfer(Object(GuzzleHttp\Psr7\Request), Array)
+#10 /Users/ogg/ws/github/paydemic-php/src/HttpClient/HttpClientBasedOnGuzzle.php(42): GuzzleHttp\Client->requestAsync('POST', '/authentication...', Array)
+#11 /Users/ogg/ws/github/paydemic-php/src/Authenticator.php(38): Paydemic\PaydemicPhpSdk\HttpClient\HttpClientBasedOnGuzzle->request('POST', '/authentication...', Array)
+#12 /Users/ogg/ws/github/paydemic-php/src/PaydemicPhpSdk.php(33): Paydemic\PaydemicPhpSdk\Authenticator->refreshTemporaryCredentials()
+#13 /Users/ogg/ws/github/paydemic-php/tests/PaydemicPhpSdkTest.php(45): Paydemic\PaydemicPhpSdk\PaydemicPhpSdk->bla()
+#14 [internal function]: Paydemic\PaydemicPhpSdk\PaydemicPhpSdkTest->testBla()
+#15 /Users/ogg/ws/github/paydemic-php/vendor/phpunit/phpunit/src/Framework/TestCase.php(909): ReflectionMethod->invokeArgs(Object(Paydemic\PaydemicPhpSdk\PaydemicPhpSdkTest), Array)
+#16 /Users/ogg/ws/github/paydemic-php/vendor/phpunit/phpunit/src/Framework/TestCase.php(768): PHPUnit_Framework_TestCase->runTest()
+#17 /Users/ogg/ws/github/paydemic-php/vendor/phpunit/phpunit/src/Framework/TestResult.php(612): PHPUnit_Framework_TestCase->runBare()
+#18 /Users/ogg/ws/github/paydemic-php/vendor/phpunit/phpunit/src/Framework/TestCase.php(724): PHPUnit_Framework_TestResult->run(Object(Paydemic\PaydemicPhpSdk\PaydemicPhpSdkTest))
+#19 /Users/ogg/ws/github/paydemic-php/vendor/phpunit/phpunit/src/Framework/TestSuite.php(747): PHPUnit_Framework_TestCase->run(Object(PHPUnit_Framework_TestResult))
+#20 /Users/ogg/ws/github/paydemic-php/vendor/phpunit/phpunit/src/Framework/TestSuite.php(747): PHPUnit_Framework_TestSuite->run(Object(PHPUnit_Framework_TestResult))
+#21 /Users/ogg/ws/github/paydemic-php/vendor/phpunit/phpunit/src/TextUI/TestRunner.php(440): PHPUnit_Framework_TestSuite->run(Object(PHPUnit_Framework_TestResult))
+#22 /Users/ogg/ws/github/paydemic-php/vendor/phpunit/phpunit/src/TextUI/Command.php(149): PHPUnit_TextUI_TestRunner->doRun(Object(PHPUnit_Framework_TestSuite), Array)
+#23 /Users/ogg/ws/github/paydemic-php/vendor/phpunit/phpunit/src/TextUI/Command.php(100): PHPUnit_TextUI_Command->run(Array, true)
+#24 /Users/ogg/ws/github/paydemic-php/vendor/phpunit/phpunit/phpunit(47): PHPUnit_TextUI_Command::main()
+#25 {main}
+
+Next exception 'Paydemic\PaydemicPhpSdk\HttpClient\HttpException' with message 'PaydemicPhpSdk.HttpException: cURL error 6: Could not resolve host: accountX.devdemic.com (see http://curl.haxx.se/libcurl/c/libcurl-errors.html)' in /Users/ogg/ws/github/paydemic-php/src/HttpClient/HttpClientBasedOnGuzzle.php:55
+Stack trace:
+#0 /Users/ogg/ws/github/paydemic-php/vendor/guzzlehttp/promises/src/RejectedPromise.php(40): Paydemic\PaydemicPhpSdk\HttpClient\HttpClientBasedOnGuzzle->Paydemic\PaydemicPhpSdk\HttpClient\{closure}(Object(GuzzleHttp\Exception\ConnectException))
+#1 /Users/ogg/ws/github/paydemic-php/vendor/guzzlehttp/promises/src/TaskQueue.php(61): GuzzleHttp\Promise\RejectedPromise::GuzzleHttp\Promise\{closure}()
+#2 /Users/ogg/ws/github/paydemic-php/vendor/guzzlehttp/promises/src/TaskQueue.php(26): GuzzleHttp\Promise\TaskQueue->run()
+#3 [internal function]: GuzzleHttp\Promise\TaskQueue->GuzzleHttp\Promise\{closure}()
+#4 {main}[0m
+[32m[2016-06-22 20:26:30] PaydemicPhpSdk.Main.INFO: Http method of the request: POST[0m
+[37;101m[2016-06-22 20:26:30] PaydemicPhpSdk.Main.ALERT: Http method of the request: POST[0m
+[101m[5m[37m[2016-06-22 20:26:30] PaydemicPhpSdk.Main.EMERGENCY: Http method of the request: POST[0m
+[33m[2016-06-22 20:27:49] PaydemicPhpSdk.Main.WARNING: Houston, we've got a problem, Ana![0m
+[31m[2016-06-22 20:27:49] PaydemicPhpSdk.Main.ERROR: exception 'GuzzleHttp\Exception\ConnectException' with message 'cURL error 6: Could not resolve host: accountX.devdemic.com (see http://curl.haxx.se/libcurl/c/libcurl-errors.html)' in /Users/ogg/ws/github/paydemic-php/vendor/guzzlehttp/guzzle/src/Handler/CurlFactory.php:186
+Stack trace:
+#0 /Users/ogg/ws/github/paydemic-php/vendor/guzzlehttp/guzzle/src/Handler/CurlFactory.php(150): GuzzleHttp\Handler\CurlFactory::createRejection(Object(GuzzleHttp\Handler\EasyHandle), Array)
+#1 /Users/ogg/ws/github/paydemic-php/vendor/guzzlehttp/guzzle/src/Handler/CurlFactory.php(103): GuzzleHttp\Handler\CurlFactory::finishError(Object(GuzzleHttp\Handler\CurlHandler), Object(GuzzleHttp\Handler\EasyHandle), Object(GuzzleHttp\Handler\CurlFactory))
+#2 /Users/ogg/ws/github/paydemic-php/vendor/guzzlehttp/guzzle/src/Handler/CurlHandler.php(43): GuzzleHttp\Handler\CurlFactory::finish(Object(GuzzleHttp\Handler\CurlHandler), Object(GuzzleHttp\Handler\EasyHandle), Object(GuzzleHttp\Handler\CurlFactory))
+#3 /Users/ogg/ws/github/paydemic-php/vendor/guzzlehttp/guzzle/src/PrepareBodyMiddleware.php(72): GuzzleHttp\Handler\CurlHandler->__invoke(Object(GuzzleHttp\Psr7\Request), Array)
+#4 /Users/ogg/ws/github/paydemic-php/vendor/guzzlehttp/guzzle/src/Middleware.php(30): GuzzleHttp\PrepareBodyMiddleware->__invoke(Object(GuzzleHttp\Psr7\Request), Array)
+#5 /Users/ogg/ws/github/paydemic-php/vendor/guzzlehttp/guzzle/src/RedirectMiddleware.php(68): GuzzleHttp\Middleware::GuzzleHttp\{closure}(Object(GuzzleHttp\Psr7\Request), Array)
+#6 /Users/ogg/ws/github/paydemic-php/vendor/guzzlehttp/guzzle/src/Middleware.php(59): GuzzleHttp\RedirectMiddleware->__invoke(Object(GuzzleHttp\Psr7\Request), Array)
+#7 /Users/ogg/ws/github/paydemic-php/vendor/guzzlehttp/guzzle/src/HandlerStack.php(67): GuzzleHttp\Middleware::GuzzleHttp\{closure}(Object(GuzzleHttp\Psr7\Request), Array)
+#8 /Users/ogg/ws/github/paydemic-php/vendor/guzzlehttp/guzzle/src/Client.php(268): GuzzleHttp\HandlerStack->__invoke(Object(GuzzleHttp\Psr7\Request), Array)
+#9 /Users/ogg/ws/github/paydemic-php/vendor/guzzlehttp/guzzle/src/Client.php(123): GuzzleHttp\Client->transfer(Object(GuzzleHttp\Psr7\Request), Array)
+#10 /Users/ogg/ws/github/paydemic-php/src/HttpClient/HttpClientBasedOnGuzzle.php(42): GuzzleHttp\Client->requestAsync('POST', '/authentication...', Array)
+#11 /Users/ogg/ws/github/paydemic-php/src/Authenticator.php(38): Paydemic\PaydemicPhpSdk\HttpClient\HttpClientBasedOnGuzzle->request('POST', '/authentication...', Array)
+#12 /Users/ogg/ws/github/paydemic-php/src/PaydemicPhpSdk.php(33): Paydemic\PaydemicPhpSdk\Authenticator->refreshTemporaryCredentials()
+#13 /Users/ogg/ws/github/paydemic-php/tests/PaydemicPhpSdkTest.php(45): Paydemic\PaydemicPhpSdk\PaydemicPhpSdk->bla()
+#14 [internal function]: Paydemic\PaydemicPhpSdk\PaydemicPhpSdkTest->testBla()
+#15 /Users/ogg/ws/github/paydemic-php/vendor/phpunit/phpunit/src/Framework/TestCase.php(909): ReflectionMethod->invokeArgs(Object(Paydemic\PaydemicPhpSdk\PaydemicPhpSdkTest), Array)
+#16 /Users/ogg/ws/github/paydemic-php/vendor/phpunit/phpunit/src/Framework/TestCase.php(768): PHPUnit_Framework_TestCase->runTest()
+#17 /Users/ogg/ws/github/paydemic-php/vendor/phpunit/phpunit/src/Framework/TestResult.php(612): PHPUnit_Framework_TestCase->runBare()
+#18 /Users/ogg/ws/github/paydemic-php/vendor/phpunit/phpunit/src/Framework/TestCase.php(724): PHPUnit_Framework_TestResult->run(Object(Paydemic\PaydemicPhpSdk\PaydemicPhpSdkTest))
+#19 /Users/ogg/ws/github/paydemic-php/vendor/phpunit/phpunit/src/Framework/TestSuite.php(747): PHPUnit_Framework_TestCase->run(Object(PHPUnit_Framework_TestResult))
+#20 /Users/ogg/ws/github/paydemic-php/vendor/phpunit/phpunit/src/Framework/TestSuite.php(747): PHPUnit_Framework_TestSuite->run(Object(PHPUnit_Framework_TestResult))
+#21 /Users/ogg/ws/github/paydemic-php/vendor/phpunit/phpunit/src/TextUI/TestRunner.php(440): PHPUnit_Framework_TestSuite->run(Object(PHPUnit_Framework_TestResult))
+#22 /Users/ogg/ws/github/paydemic-php/vendor/phpunit/phpunit/src/TextUI/Command.php(149): PHPUnit_TextUI_TestRunner->doRun(Object(PHPUnit_Framework_TestSuite), Array)
+#23 /Users/ogg/ws/github/paydemic-php/vendor/phpunit/phpunit/src/TextUI/Command.php(100): PHPUnit_TextUI_Command->run(Array, true)
+#24 /Users/ogg/ws/github/paydemic-php/vendor/phpunit/phpunit/phpunit(47): PHPUnit_TextUI_Command::main()
+#25 {main}
+
+Next exception 'Paydemic\PaydemicPhpSdk\HttpClient\HttpException' with message 'PaydemicPhpSdk.HttpException: cURL error 6: Could not resolve host: accountX.devdemic.com (see http://curl.haxx.se/libcurl/c/libcurl-errors.html)' in /Users/ogg/ws/github/paydemic-php/src/HttpClient/HttpClientBasedOnGuzzle.php:55
+Stack trace:
+#0 /Users/ogg/ws/github/paydemic-php/vendor/guzzlehttp/promises/src/RejectedPromise.php(40): Paydemic\PaydemicPhpSdk\HttpClient\HttpClientBasedOnGuzzle->Paydemic\PaydemicPhpSdk\HttpClient\{closure}(Object(GuzzleHttp\Exception\ConnectException))
+#1 /Users/ogg/ws/github/paydemic-php/vendor/guzzlehttp/promises/src/TaskQueue.php(61): GuzzleHttp\Promise\RejectedPromise::GuzzleHttp\Promise\{closure}()
+#2 /Users/ogg/ws/github/paydemic-php/vendor/guzzlehttp/promises/src/TaskQueue.php(26): GuzzleHttp\Promise\TaskQueue->run()
+#3 [internal function]: GuzzleHttp\Promise\TaskQueue->GuzzleHttp\Promise\{closure}()
+#4 {main}[0m
+[32m[2016-06-22 20:27:49] PaydemicPhpSdk.Main.INFO: Http method of the request: POST[0m
+[37;101m[2016-06-22 20:27:49] PaydemicPhpSdk.Main.ALERT: Http method of the request: POST[0m
+[101m[5m[37m[2016-06-22 20:27:49] PaydemicPhpSdk.Main.EMERGENCY: Http method of the request: POST[0m
+[33m[2016-06-22 20:28:46] PaydemicPhpSdk.Main.WARNING: Houston, we've got a problem, Ana![0m
+[31m[2016-06-22 20:28:46] PaydemicPhpSdk.Main.ERROR: exception 'GuzzleHttp\Exception\ConnectException' with message 'cURL error 6: Could not resolve host: accountX.devdemic.com (see http://curl.haxx.se/libcurl/c/libcurl-errors.html)' in /Users/ogg/ws/github/paydemic-php/vendor/guzzlehttp/guzzle/src/Handler/CurlFactory.php:186
+Stack trace:
+#0 /Users/ogg/ws/github/paydemic-php/vendor/guzzlehttp/guzzle/src/Handler/CurlFactory.php(150): GuzzleHttp\Handler\CurlFactory::createRejection(Object(GuzzleHttp\Handler\EasyHandle), Array)
+#1 /Users/ogg/ws/github/paydemic-php/vendor/guzzlehttp/guzzle/src/Handler/CurlFactory.php(103): GuzzleHttp\Handler\CurlFactory::finishError(Object(GuzzleHttp\Handler\CurlHandler), Object(GuzzleHttp\Handler\EasyHandle), Object(GuzzleHttp\Handler\CurlFactory))
+#2 /Users/ogg/ws/github/paydemic-php/vendor/guzzlehttp/guzzle/src/Handler/CurlHandler.php(43): GuzzleHttp\Handler\CurlFactory::finish(Object(GuzzleHttp\Handler\CurlHandler), Object(GuzzleHttp\Handler\EasyHandle), Object(GuzzleHttp\Handler\CurlFactory))
+#3 /Users/ogg/ws/github/paydemic-php/vendor/guzzlehttp/guzzle/src/PrepareBodyMiddleware.php(72): GuzzleHttp\Handler\CurlHandler->__invoke(Object(GuzzleHttp\Psr7\Request), Array)
+#4 /Users/ogg/ws/github/paydemic-php/vendor/guzzlehttp/guzzle/src/Middleware.php(30): GuzzleHttp\PrepareBodyMiddleware->__invoke(Object(GuzzleHttp\Psr7\Request), Array)
+#5 /Users/ogg/ws/github/paydemic-php/vendor/guzzlehttp/guzzle/src/RedirectMiddleware.php(68): GuzzleHttp\Middleware::GuzzleHttp\{closure}(Object(GuzzleHttp\Psr7\Request), Array)
+#6 /Users/ogg/ws/github/paydemic-php/vendor/guzzlehttp/guzzle/src/Middleware.php(59): GuzzleHttp\RedirectMiddleware->__invoke(Object(GuzzleHttp\Psr7\Request), Array)
+#7 /Users/ogg/ws/github/paydemic-php/vendor/guzzlehttp/guzzle/src/HandlerStack.php(67): GuzzleHttp\Middleware::GuzzleHttp\{closure}(Object(GuzzleHttp\Psr7\Request), Array)
+#8 /Users/ogg/ws/github/paydemic-php/vendor/guzzlehttp/guzzle/src/Client.php(268): GuzzleHttp\HandlerStack->__invoke(Object(GuzzleHttp\Psr7\Request), Array)
+#9 /Users/ogg/ws/github/paydemic-php/vendor/guzzlehttp/guzzle/src/Client.php(123): GuzzleHttp\Client->transfer(Object(GuzzleHttp\Psr7\Request), Array)
+#10 /Users/ogg/ws/github/paydemic-php/src/HttpClient/HttpClientBasedOnGuzzle.php(42): GuzzleHttp\Client->requestAsync('POST', '/authentication...', Array)
+#11 /Users/ogg/ws/github/paydemic-php/src/Authenticator.php(38): Paydemic\PaydemicPhpSdk\HttpClient\HttpClientBasedOnGuzzle->request('POST', '/authentication...', Array)
+#12 /Users/ogg/ws/github/paydemic-php/src/PaydemicPhpSdk.php(33): Paydemic\PaydemicPhpSdk\Authenticator->refreshTemporaryCredentials()
+#13 /Users/ogg/ws/github/paydemic-php/tests/PaydemicPhpSdkTest.php(45): Paydemic\PaydemicPhpSdk\PaydemicPhpSdk->bla()
+#14 [internal function]: Paydemic\PaydemicPhpSdk\PaydemicPhpSdkTest->testBla()
+#15 /Users/ogg/ws/github/paydemic-php/vendor/phpunit/phpunit/src/Framework/TestCase.php(909): ReflectionMethod->invokeArgs(Object(Paydemic\PaydemicPhpSdk\PaydemicPhpSdkTest), Array)
+#16 /Users/ogg/ws/github/paydemic-php/vendor/phpunit/phpunit/src/Framework/TestCase.php(768): PHPUnit_Framework_TestCase->runTest()
+#17 /Users/ogg/ws/github/paydemic-php/vendor/phpunit/phpunit/src/Framework/TestResult.php(612): PHPUnit_Framework_TestCase->runBare()
+#18 /Users/ogg/ws/github/paydemic-php/vendor/phpunit/phpunit/src/Framework/TestCase.php(724): PHPUnit_Framework_TestResult->run(Object(Paydemic\PaydemicPhpSdk\PaydemicPhpSdkTest))
+#19 /Users/ogg/ws/github/paydemic-php/vendor/phpunit/phpunit/src/Framework/TestSuite.php(747): PHPUnit_Framework_TestCase->run(Object(PHPUnit_Framework_TestResult))
+#20 /Users/ogg/ws/github/paydemic-php/vendor/phpunit/phpunit/src/Framework/TestSuite.php(747): PHPUnit_Framework_TestSuite->run(Object(PHPUnit_Framework_TestResult))
+#21 /Users/ogg/ws/github/paydemic-php/vendor/phpunit/phpunit/src/TextUI/TestRunner.php(440): PHPUnit_Framework_TestSuite->run(Object(PHPUnit_Framework_TestResult))
+#22 /Users/ogg/ws/github/paydemic-php/vendor/phpunit/phpunit/src/TextUI/Command.php(149): PHPUnit_TextUI_TestRunner->doRun(Object(PHPUnit_Framework_TestSuite), Array)
+#23 /Users/ogg/ws/github/paydemic-php/vendor/phpunit/phpunit/src/TextUI/Command.php(100): PHPUnit_TextUI_Command->run(Array, true)
+#24 /Users/ogg/ws/github/paydemic-php/vendor/phpunit/phpunit/phpunit(47): PHPUnit_TextUI_Command::main()
+#25 {main}
+
+Next exception 'Paydemic\PaydemicPhpSdk\HttpClient\HttpException' with message 'PaydemicPhpSdk.HttpException: cURL error 6: Could not resolve host: accountX.devdemic.com (see http://curl.haxx.se/libcurl/c/libcurl-errors.html)' in /Users/ogg/ws/github/paydemic-php/src/HttpClient/HttpClientBasedOnGuzzle.php:55
+Stack trace:
+#0 /Users/ogg/ws/github/paydemic-php/vendor/guzzlehttp/promises/src/RejectedPromise.php(40): Paydemic\PaydemicPhpSdk\HttpClient\HttpClientBasedOnGuzzle->Paydemic\PaydemicPhpSdk\HttpClient\{closure}(Object(GuzzleHttp\Exception\ConnectException))
+#1 /Users/ogg/ws/github/paydemic-php/vendor/guzzlehttp/promises/src/TaskQueue.php(61): GuzzleHttp\Promise\RejectedPromise::GuzzleHttp\Promise\{closure}()
+#2 /Users/ogg/ws/github/paydemic-php/vendor/guzzlehttp/promises/src/TaskQueue.php(26): GuzzleHttp\Promise\TaskQueue->run()
+#3 [internal function]: GuzzleHttp\Promise\TaskQueue->GuzzleHttp\Promise\{closure}()
+#4 {main}[0m
+[32m[2016-06-22 20:28:46] PaydemicPhpSdk.Main.INFO: Http method of the request: POST[0m
+[37;101m[2016-06-22 20:28:46] PaydemicPhpSdk.Main.ALERT: Http method of the request: POST[0m
+[101m[5m[37m[2016-06-22 20:28:46] PaydemicPhpSdk.Main.EMERGENCY: Ana fa cafeeaaaaaaaa!!! :D:[0m
