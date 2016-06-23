@@ -43,11 +43,12 @@ class PaydemicPhpSdk
                     $this->log->info($res->body . "\n");
                 },
                 function (HttpException $he) {
-                    $this->log->warn("Houston, we've got a problem!");
                     $this->log->err($he);
-                    $this->log->info("Http method of the request: " . $he->httpMethod);
-                    $this->log->alert("Http method of the request: " . $he->httpMethod);
-                    $this->log->emerg("Http method of the request: " . $he->httpMethod);
+                    //  TODO OGG: remove these
+                    //  $this->log->warn("Houston, we've got a problem!");
+                    //  $this->log->info("Http method of the request: " . $he->httpMethod);
+                    //  $this->log->alert("Http method of the request: " . $he->httpMethod);
+                    //  $this->log->emerg("Http method of the request: " . $he->httpMethod);
                 }
             );
     }

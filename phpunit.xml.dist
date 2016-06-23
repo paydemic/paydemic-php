@@ -1,7 +1,7 @@
-<phpunit bootstrap="tests/bootstrap.php">
+<phpunit bootstrap="tests/Paydemic/bootstrap.php">
     <testsuites>
         <testsuite>
-            <directory suffix="Test.php">tests</directory>
+            <directory suffix="Test.php">tests/Paydemic</directory>
         </testsuite>
     </testsuites>
 
@@ -13,7 +13,7 @@
 
     <filter>
         <whitelist>
-            <directory suffix=".php">src</directory>
+            <directory suffix=".php">src/Paydemic</directory>
         </whitelist>
     </filter>
 </phpunit>

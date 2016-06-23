@@ -17,7 +17,7 @@ class Logger
     {
         $stdoutHandler = new StreamHandler('php://stdout', Monologger::INFO);
         $fileHandler = new RotatingFileHandler(
-            dirname(__DIR__) . '/../logs/paydemic-php-sdk.log',
+            dirname(__DIR__) . '/../../logs/paydemic-php-sdk.log',
             5,
             Monologger::INFO
         );

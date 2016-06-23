@@ -15,7 +15,7 @@ class HttpException extends RuntimeException implements ExceptionInterface
     public function __construct(
         $message,
         $code,
-        \Exception $previous,
+        $previous,
         $httpMethod,
         $requestPath,
         $requestOptions

@@ -25,7 +25,7 @@ class PaydemicPhpSdkTest extends \PHPUnit_Framework_TestCase
     private static function loadCredentials()
     {
         $credentials = file_get_contents(
-            dirname(__DIR__) . "/tests/credentials/accessKey.json"
+            dirname(__DIR__) . "/Paydemic/credentials/accessKey.json"
         );
         $json_a = json_decode($credentials, true);
         return $json_a;

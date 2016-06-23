@@ -42,9 +42,24 @@ class HttpClientBasedOnGuzzle implements HttpClientInterface
     {
         return $this->client->requestAsync($method, $path, $options)
             ->then(
-                function (ResponseInterface $res) {
+                function (ResponseInterface $res) use ($method, $path, $options) {
+                    $resultBodyContents = $res->getBody()->getContents();
+                    $resultJson = json_decode($resultBodyContents, true);
+                    if (isset($resultJson['errorMessage'])) {
+                        $this->log->err($resultBodyContents);
+                        $httpException = new HttpException(
+                            "Paydemic.Internal.HttpException: " . $resultJson['errorMessage'],
+                            null,
+                            null,
+                            $method,
+                            $path,
+                            $options
+                        );
+                        return new RejectedPromise($httpException);
+                    }
+
                     $httpResponse = new HttpResponse(
-                        $res->getBody()->getContents(),
+                        $resultBodyContents,
                         $res->getStatusCode(),
                         $res->getReasonPhrase(),
                         $res->getHeaders(),

@@ -28,14 +28,14 @@
     },
     "autoload": {
         "psr-4": {
-            "Paydemic\\": "src/"
+            "Paydemic\\": "src/Paydemic/"
         }
     },
     "autoload-dev": {
         "psr-4": {
             "Paydemic\\Tests\\": [
-                "tests/",
-                "tests/Fake"
+                "tests/Paydemic/",
+                "tests/Paydemic/Fake"
             ]
         }
     },
