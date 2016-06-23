@@ -4,8 +4,8 @@
  *
  * @license http://opensource.org/licenses/MIT MIT
  */
-namespace Paydemic\PaydemicPhpSdk\Exception;
+namespace Paydemic\Internal\Exception;
 
-class RuntimeException extends \RuntimeException implements ExceptionInterface
+interface ExceptionInterface
 {
 }

@@ -4,7 +4,7 @@
  *
  * @license http://opensource.org/licenses/MIT MIT
  */
-namespace Paydemic\PaydemicPhpSdk\HttpClient;
+namespace Paydemic\Internal\HttpClient;
 
 interface HttpClientInterface
 {

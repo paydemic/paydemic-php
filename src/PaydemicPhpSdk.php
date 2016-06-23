@@ -4,11 +4,13 @@
  *
  * @license http://opensource.org/licenses/MIT MIT
  */
-namespace Paydemic\PaydemicPhpSdk;
+namespace Paydemic;
 
-use Paydemic\PaydemicPhpSdk\HttpClient\HttpClientBasedOnGuzzle;
-use Paydemic\PaydemicPhpSdk\HttpClient\HttpException;
-use Paydemic\PaydemicPhpSdk\HttpClient\HttpResponse;
+use Paydemic\Internal\Authenticator;
+use Paydemic\Internal\Exception\HttpException;
+use Paydemic\Internal\HttpClient\HttpClientBasedOnGuzzle;
+use Paydemic\Internal\HttpClient\HttpResponse;
+use Paydemic\Internal\Logger;
 
 class PaydemicPhpSdk
 {
@@ -22,7 +24,7 @@ class PaydemicPhpSdk
         $secretAccessKey,
         $timeout = 20.0
     ) {
-        $this->log = Logger::getLogger('PaydemicPhpSdk.Main');
+        $this->log = Logger::getLogger('PaydemicPhpSdk');
         $this->client = new HttpClientBasedOnGuzzle($host, $timeout);
         $this->authenticator =
             new Authenticator($accessKeyId, $secretAccessKey, $this->client);

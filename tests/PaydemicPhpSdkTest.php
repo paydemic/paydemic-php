@@ -1,6 +1,8 @@
 <?php
 
-namespace Paydemic\PaydemicPhpSdk;
+namespace Paydemic\Tests;
+
+use Paydemic\PaydemicPhpSdk;
 
 class PaydemicPhpSdkTest extends \PHPUnit_Framework_TestCase
 {
@@ -37,7 +39,7 @@ class PaydemicPhpSdkTest extends \PHPUnit_Framework_TestCase
     public function testNew()
     {
         $actual = self::$sdk;
-        $this->assertInstanceOf('\Paydemic\PaydemicPhpSdk\PaydemicPhpSdk', $actual);
+        $this->assertInstanceOf('\Paydemic\PaydemicPhpSdk', $actual);
     }
 
     public function testBla()

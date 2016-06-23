@@ -4,7 +4,7 @@
  *
  * @license http://opensource.org/licenses/MIT MIT
  */
-namespace Paydemic\PaydemicPhpSdk;
+namespace Paydemic\Internal;
 
 /**
  * Interface PaydemicRequests

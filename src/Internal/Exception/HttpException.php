@@ -4,10 +4,7 @@
  *
  * @license http://opensource.org/licenses/MIT MIT
  */
-namespace Paydemic\PaydemicPhpSdk\HttpClient;
-
-use \Paydemic\PaydemicPhpSdk\Exception\ExceptionInterface;
-use \Paydemic\PaydemicPhpSdk\Exception\RuntimeException;
+namespace Paydemic\Internal\Exception;
 
 class HttpException extends RuntimeException implements ExceptionInterface
 {

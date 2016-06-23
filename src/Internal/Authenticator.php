@@ -4,9 +4,9 @@
  *
  * @license http://opensource.org/licenses/MIT MIT
  */
-namespace Paydemic\PaydemicPhpSdk;
+namespace Paydemic\Internal;
 
-use \Paydemic\PaydemicPhpSdk\HttpClient\HttpClientInterface;
+use \Paydemic\Internal\HttpClient\HttpClientInterface;
 
 class Authenticator
 {

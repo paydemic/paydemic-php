@@ -4,7 +4,7 @@
  *
  * @license http://opensource.org/licenses/MIT MIT
  */
-namespace Paydemic\PaydemicPhpSdk\Exception;
+namespace Paydemic\Internal\Exception;
 
 class LogicException extends \LogicException implements ExceptionInterface
 {

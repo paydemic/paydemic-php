@@ -4,7 +4,7 @@
  *
  * @license http://opensource.org/licenses/MIT MIT
  */
-namespace Paydemic\PaydemicPhpSdk;
+namespace Paydemic\Internal;
 
 use Monolog\Logger as Monologger;
 use Monolog\Handler\StreamHandler;
@@ -17,7 +17,7 @@ class Logger
     {
         $stdoutHandler = new StreamHandler('php://stdout', Monologger::INFO);
         $fileHandler = new RotatingFileHandler(
-            dirname(__DIR__) . '/logs/paydemic-php-sdk.log',
+            dirname(__DIR__) . '/../logs/paydemic-php-sdk.log',
             5,
             Monologger::INFO
         );

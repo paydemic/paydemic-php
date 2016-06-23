@@ -4,7 +4,7 @@
  *
  * @license http://opensource.org/licenses/MIT MIT
  */
-namespace Paydemic\PaydemicPhpSdk\HttpClient;
+namespace Paydemic\Internal\HttpClient;
 
 use GuzzleHttp\Promise\FulfilledPromise;
 use GuzzleHttp\Promise\RejectedPromise;
@@ -14,7 +14,8 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Handler\CurlHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7;
-use Paydemic\PaydemicPhpSdk\Logger;
+use Paydemic\Internal\Exception\HttpException;
+use Paydemic\Internal\Logger;
 
 class HttpClientBasedOnGuzzle implements HttpClientInterface
 {
