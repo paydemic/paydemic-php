@@ -16,6 +16,7 @@ class PaydemicPhpSdkTest extends \PHPUnit_Framework_TestCase
         $credentials = self::loadCredentials();
 
         self::$sdk = new PaydemicPhpSdk(
+            'eu-west-1',
             'account.devdemic.com',
             $credentials['accessKeyId'],
             $credentials['secretAccessKey']
@@ -42,9 +43,11 @@ class PaydemicPhpSdkTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\Paydemic\PaydemicPhpSdk', $actual);
     }
 
-    public function testBla()
+    public function testGetPurchaseLinks()
     {
-        self::$sdk->bla();
-        $this->assertTrue(true);
+        $this->assertInstanceOf(
+            '\Paydemic\PurchaseLinks',
+            self::$sdk->purchaseLinks
+        );
     }
 }

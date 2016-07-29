@@ -18,7 +18,9 @@
         "php": ">=5.5.0",
         "guzzlehttp/guzzle": "~6.0",
         "monolog/monolog": "^1.19",
-        "bramus/monolog-colored-line-formatter": "~2.0"
+        "bramus/monolog-colored-line-formatter": "~2.0",
+        "maciejczyzewski/bottomline": "*",
+        "aws/aws-sdk-php": "^3.18"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.8 || ~5.0",

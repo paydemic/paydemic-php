@@ -18,16 +18,50 @@ class PaydemicPhpSdk
     private $authenticator;
     private $client;
 
+    private $accessKeyId;
+    private $secretAccessKey;
+
+    private $purchaseLinks;
+
     public function __construct(
+        $region,
         $host,
         $accessKeyId,
         $secretAccessKey,
         $timeout = 20.0
     ) {
         $this->log = Logger::getLogger('PaydemicPhpSdk');
-        $this->client = new HttpClientBasedOnGuzzle($host, $timeout);
+
+        $this->client = new HttpClientBasedOnGuzzle(
+            $accessKeyId,
+            $secretAccessKey,
+            $region,
+            $host,
+            $timeout
+        );
         $this->authenticator =
             new Authenticator($accessKeyId, $secretAccessKey, $this->client);
+    }
+
+    public function __get($property)
+    {
+        if (property_exists($this, $property)) {
+            switch ($property) {
+                case "purchaseLinks":
+                    if (!isset($this->purchaseLinks)) {
+                        $this->purchaseLinks = new PurchaseLinks(
+                            $this->accessKeyId,
+                            $this->secretAccessKey,
+                            $this->client
+                        );
+                    }
+                    break;
+//                TODO OGG: add the other
+                default:
+                    // nothing to do
+            }
+            return $this->$property;
+        }
     }
 
     public function bla()

@@ -15,4 +15,7 @@ interface PaydemicRequests
 {
     const TEMPORARY_CREDENTIALS_METHOD = 'POST';
     const TEMPORARY_CREDENTIALS_PATH = '/authentication/temporarycredentials';
+
+    const PURCHASE_LINKS_GET_METHOD = "GET";
+    const PURCHASE_LINKS_GET_PATH = "/api/purchaselinks";
 }
