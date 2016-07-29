@@ -37,6 +37,59 @@ class PurchaseLinks
     }
 
     /**
+     * Creates a Purchase Link.
+     * @param string $url      url to be sold
+     * @param string $title    purchase link title
+     * @param string $currency currency ISO code (RON, USD, EUR ...)
+     * @param double $price    price of the purchase link
+     * @return mixed Promise fulfilled with response json
+     */
+    public function create($url, $title, $currency, $price)
+    {
+        return $this->authenticator->refreshTemporaryCredentials()
+            ->then(
+                function (/*HttpResponse */$res) use (
+                    $url,
+                    $title,
+                    $currency,
+                    $price
+                ) {
+                    $resJson = json_decode($res->body, true);
+
+                    $this->log->info("Creating Purchase Link ...");
+
+                    return $this->client->signedRequest(
+                        PaydemicRequests::PURCHASE_LINKS_CREATE_METHOD,
+                        $resJson["accessKeyId"],
+                        $resJson["secretAccessKey"],
+                        $resJson['sessionToken'],
+                        $resJson["expiration"],
+                        PaydemicRequests::PURCHASE_LINKS_CREATE_PATH,
+                        json_encode(
+                            [
+                                'finalUrl' => $url,
+                                'title' => $title,
+                                'price' =>
+                                [
+                                    'currencyCode' => $currency,
+                                    'amount' => $price
+                                ]
+                            ]
+                        )
+                    );
+                },
+                function (/*HttpException */$he) {
+                    $this->log->err($he);
+                }
+            )
+            ->then(
+                function (/*HttpResponse */$res) {
+                    return json_decode($res->body, true);
+                }
+            );
+    }
+
+    /**
      * Lists all Purchase Links.
      * @return mixed Promise fulfilled with response json
      */
@@ -50,12 +103,12 @@ class PurchaseLinks
                     $this->log->info('Listing Purchase Links ...');
 
                     return $this->client->signedRequest(
-                        PaydemicRequests::PURCHASE_LINKS_GET_METHOD,
+                        PaydemicRequests::PURCHASE_LINKS_LIST_METHOD,
                         $resJson["accessKeyId"],
                         $resJson["secretAccessKey"],
                         $resJson['sessionToken'],
                         $resJson["expiration"],
-                        PaydemicRequests::PURCHASE_LINKS_GET_PATH,
+                        PaydemicRequests::PURCHASE_LINKS_LIST_PATH,
                         null
                     );
                 },

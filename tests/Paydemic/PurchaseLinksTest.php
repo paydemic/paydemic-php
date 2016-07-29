@@ -49,6 +49,23 @@ class PurchaseLinksTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\Paydemic\PurchaseLinks', $actual);
     }
 
+    public function testCreate()
+    {
+        $res = self::$purchaseLinks->create(
+            "https://haskell.org",
+            "Haskell org",
+            "USD",
+            4.0
+        )->wait();
+        print("Create Purchase Link result:\n");
+        print_r($res);
+        $this->assertNotEmpty($res['id']);
+        $this->assertEquals('https://haskell.org', $res['finalUrl']);
+        $this->assertEquals('Haskell org', $res['title']);
+        $this->assertEquals('USD', $res['price']['currencyCode']);
+        $this->assertEquals(4, round($res['price']['amount']));
+    }
+
     public function testListAll()
     {
         $res = self::$purchaseLinks->listAll()->wait();
