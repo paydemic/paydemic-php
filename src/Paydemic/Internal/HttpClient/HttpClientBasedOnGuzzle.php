@@ -6,32 +6,31 @@
  */
 namespace Paydemic\Internal\HttpClient;
 
-use GuzzleHttp\Promise\FulfilledPromise;
-use GuzzleHttp\Promise\RejectedPromise;
-use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
-use GuzzleHttp\Exception\RequestException;
+use Aws\Credentials\Credentials;
+
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Handler\CurlHandler;
 use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Promise\RejectedPromise;
 use GuzzleHttp\Psr7\Request;
+
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
+
+use Paydemic\Internal\ApiGatewaySignatureV4;
 use Paydemic\Internal\Exception\HttpException;
 use Paydemic\Internal\Logger;
-use Aws\Credentials\Credentials;
-use Aws\Signature\SignatureV4;
 
 class HttpClientBasedOnGuzzle implements HttpClientInterface
 {
     private $baseuri;
     private $client;
     private $log;
-    private $key;
-    private $secret;
     private $signatureV4;
+    private $host;
 
     public function __construct(
-        $key,
-        $secret,
         $region,
         $host,
         $timeout = 20.0
@@ -40,8 +39,7 @@ class HttpClientBasedOnGuzzle implements HttpClientInterface
             Logger::getLogger('PaydemicPhpSdk.HttpClientBasedOnGuzzle');
         $this->baseuri = "https://$host";
 
-        $this->key = $key;
-        $this->secret = $secret;
+        $this->host = $host;
 
         $handler = new CurlHandler();
         $stack = HandlerStack::create($handler); // Wrap w/ middleware
@@ -51,42 +49,45 @@ class HttpClientBasedOnGuzzle implements HttpClientInterface
             'base_uri' => $this->baseuri,
             'timeout'  => $timeout,
             'headers' => [
-                'Host' => $host,
+                'Host' => $this->host,
+                'Accept' => 'application/json',
                 'User-Agent' => 'paydemic-php/v1.0.0'
             ]
         ]);
 
-        $this->signatureV4 = new SignatureV4("execute-api", $region);
+        $this->signatureV4 = new ApiGatewaySignatureV4("execute-api", $region);
     }
 
     public function signedRequest(
         $method,
+        $key,
+        $secret,
         $token,
         $tokenExpires,
-        $path = null,
+        $path,
         $body = null
     ) {
         $signedRequest = $this->signatureV4->signRequest(
             new Request(
                 $method,
-                $this->baseuri . ($path ? $path : ''),
+                $this->baseuri . $path,
                 [],
                 $body
             ),
-            new Credentials($this->key, $this->secret, $token, $tokenExpires)
+            new Credentials($key, $secret, $token, $tokenExpires)
         );
         return $this->sendAsync($signedRequest);
     }
 
     public function unsignedRequest(
         $method,
-        $path = null,
+        $path,
         $body = null
     ) {
         return $this->sendAsync(
             new Request(
                 $method,
-                $this->baseuri . ($path ? $path : ''),
+                $this->baseuri . $path,
                 [],
                 $body
             )
@@ -119,8 +120,6 @@ class HttpClientBasedOnGuzzle implements HttpClientInterface
                     $res->getHeaders(),
                     $res->getProtocolVersion()
                 );
-                // TODO OGG: remove
-                // return new FulfilledPromise($httpResponse);
             },
             function (RequestException $e) use ($request) {
                 $httpException = new HttpException(

@@ -2,9 +2,9 @@
 
 namespace Paydemic\Tests;
 
-use Paydemic\Internal\Exception\HttpException;
+// use Paydemic\Internal\Exception\HttpException;
 use Paydemic\Internal\HttpClient\HttpClientBasedOnGuzzle;
-use Paydemic\Internal\HttpClient\HttpResponse;
+// use Paydemic\Internal\HttpClient\HttpResponse;
 use Paydemic\PurchaseLinks;
 
 class PurchaseLinksTest extends \PHPUnit_Framework_TestCase
@@ -17,11 +17,8 @@ class PurchaseLinksTest extends \PHPUnit_Framework_TestCase
 
     public static function setUpBeforeClass()
     {
-//        $this->log = Logger::getLogger('PaydemicPhpSdk.PurchaseLinksTest');
         $credentials = self::loadCredentials();
         $client = new HttpClientBasedOnGuzzle(
-            $credentials['accessKeyId'],
-            $credentials['secretAccessKey'],
             'eu-west-1',
             'account.devdemic.com'
         );
@@ -52,17 +49,14 @@ class PurchaseLinksTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\Paydemic\PurchaseLinks', $actual);
     }
 
-    public function testFetchAll()
+    public function testListAll()
     {
-        self::$purchaseLinks->fetchAll()->then(
-            function (HttpResponse $res) {
-                // TODO OGG: remove
-                // print ("fetchAll response:\n");
-                // print_r($res);
-            },
-            function (HttpException $exception) {
-            }
+        $res = self::$purchaseLinks->listAll()->wait();
+        $nbPls = count($res);
+        print("Found $nbPls Purchase Links.");
+        $this->assertTrue(
+            $nbPls > 0,
+            "At least one Purchase Link should be found!"
         );
-        $this->assertTrue(true);
     }
 }
