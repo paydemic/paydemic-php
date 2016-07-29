@@ -12,14 +12,14 @@ composer test
 ```
 ...
 "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/paydemic/paydemic-php"
-        }
-    ],
-    "require": {
-        "paydemic/paydemic-php": "dev-master"
+    {
+        "type": "vcs",
+        "url": "https://github.com/paydemic/paydemic-php"
     }
+],
+"require": {
+    "paydemic/paydemic-php": "dev-master"
+}
 ...
 ```
 
