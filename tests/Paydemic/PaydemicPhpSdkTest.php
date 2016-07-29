@@ -49,39 +49,74 @@ class PaydemicPhpSdkTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testCreate()
+    public function testCRUDL()
     {
-        $res = self::$sdk->PurchaseLinks->create(
-            "https://haskell.org",
-            "Haskell org",
-            "USD",
-            4.0
-        )->wait();
-        print("\nCreate Purchase Link result:\n");
-        print_r($res);
-        print("\n");
-        $this->assertNotEmpty($res['id']);
-        $this->assertEquals('https://haskell.org', $res['finalUrl']);
-        $this->assertEquals('Haskell org', $res['title']);
-        $this->assertEquals('USD', $res['price']['currencyCode']);
-        $this->assertEquals(4, round($res['price']['amount']));
-    }
+        $finalUrl = "https://haskell.org";
+        $title = "Haskell org";
+        $currencyCode = "USD";
+        $price = 4.0;
 
-    public function testListAllAndReadOne()
-    {
-        $res = self::$sdk->PurchaseLinks->listAll()->wait();
-        $nbPls = count($res);
-        print("\nFound $nbPls Purchase Links.\n");
+        // test create
+        $created = self::$sdk->PurchaseLinks->create(
+            $finalUrl,
+            $title,
+            $currencyCode,
+            $price
+        )->wait();
+        print("\nCreated Purchase Link:\n");
+        print_r($created);
+        print("\n");
+        $id = $created['id'];
+        $this->assertNotEmpty($id);
+        $this->assertEquals($finalUrl, $created['finalUrl']);
+        $this->assertEquals($title, $created['title']);
+        $this->assertEquals($currencyCode, $created['price']['currencyCode']);
+        $this->assertEquals($price, round($created['price']['amount']));
+
+        // test retrieve
+        $retrieved = self::$sdk->PurchaseLinks->retrieve($id)->wait();
+        print("\nRetrieved Purchase Link:\n");
+        print_r($retrieved);
+        print("\n");
+        $this->assertEquals($id, $retrieved['id']);
+        $this->assertEquals($finalUrl, $retrieved['finalUrl']);
+        $this->assertEquals($title, $retrieved['title']);
+        $this->assertEquals($currencyCode, $retrieved['price']['currencyCode']);
+        $this->assertEquals($price, round($retrieved['price']['amount']));
+
+        // test update
+        $finalUrlUpdate = $finalUrl . '#updated';
+        $titleUpdate = $title . ' UPDATED';
+        $priceUpdate = 6.0;
+        $updated = self::$sdk->PurchaseLinks->update(
+            $id,
+            $finalUrlUpdate,
+            $titleUpdate,
+            $currencyCode,
+            $priceUpdate
+        )->wait();
+        print("\nUpdated Purchase Link ${created['id']}:\n");
+        print_r($updated);
+        $this->assertEquals($id, $updated['id']);
+        $this->assertEquals($finalUrlUpdate, $updated['finalUrl']);
+        $this->assertEquals($titleUpdate, $updated['title']);
+        $this->assertEquals($currencyCode, $updated['price']['currencyCode']);
+        $this->assertEquals($priceUpdate, round($updated['price']['amount']));
+
+        // test list all
+        $listed = self::$sdk->PurchaseLinks->listAll()->wait();
+        $nbListed = count($listed);
+        print("\nListed $nbListed Purchase Links.\n");
         $this->assertTrue(
-            $nbPls > 0,
-            "At least one Purchase Link should be found!"
+            $nbListed > 0,
+            "At least one Purchase Link should be found by listAll()!"
         );
 
-        $firstPurchaseLink = self::$sdk->PurchaseLinks->retrieve($res[0]['id'])->wait();
-        print("\nFirst read purchase link:\n");
-        print_r($firstPurchaseLink);
-        print("\n");
-
-        $this->assertEquals($res[0]['id'], $firstPurchaseLink['id']);
+        // test delete
+        $deleted = self::$sdk->PurchaseLinks->delete($id)->wait();
+        print("\nDeleted Purchase Link ${created['id']}:\n");
+        print_r($deleted);
+        $this->assertEquals($id, $deleted['id']);
+        $this->assertEquals('SUCCESS', $deleted['status']);
     }
 }

@@ -38,8 +38,8 @@ class Authenticator
             ]
         );
         return $this->client->unsignedRequest(
-            PaydemicRequests::TEMPORARY_CREDENTIALS_METHOD,
-            PaydemicRequests::TEMPORARY_CREDENTIALS_PATH,
+            'POST',
+            '/authentication/temporarycredentials',
             $payload
         );
     }
