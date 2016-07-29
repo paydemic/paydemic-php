@@ -57,8 +57,9 @@ class PurchaseLinksTest extends \PHPUnit_Framework_TestCase
             "USD",
             4.0
         )->wait();
-        print("Create Purchase Link result:\n");
+        print("\nCreate Purchase Link result:\n");
         print_r($res);
+        print("\n");
         $this->assertNotEmpty($res['id']);
         $this->assertEquals('https://haskell.org', $res['finalUrl']);
         $this->assertEquals('Haskell org', $res['title']);
@@ -66,14 +67,22 @@ class PurchaseLinksTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(4, round($res['price']['amount']));
     }
 
-    public function testListAll()
+    public function testListAllAndReadOne()
     {
         $res = self::$purchaseLinks->listAll()->wait();
         $nbPls = count($res);
-        print("Found $nbPls Purchase Links.");
+        print("\nFound $nbPls Purchase Links.\n");
         $this->assertTrue(
             $nbPls > 0,
             "At least one Purchase Link should be found!"
         );
+
+        $firstPurchaseLink = self::$purchaseLinks->read($res[0]['id'])->wait();
+        print("\nFirst read purchase link:\n");
+        print_r($firstPurchaseLink);
+        print("\n");
+
+        $this->assertEquals($res[0]['id'], $firstPurchaseLink['id']);
+        // TODO OGG: this can be enhanced - test that all other PL attrs are set
     }
 }

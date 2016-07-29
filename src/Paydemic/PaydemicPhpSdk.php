@@ -52,7 +52,6 @@ class PaydemicPhpSdk
                         );
                     }
                     break;
-//                TODO OGG: add the other
                 default:
                     // nothing to do
             }

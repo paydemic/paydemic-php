@@ -90,6 +90,41 @@ class PurchaseLinks
     }
 
     /**
+     * Reads a Purchase Link.
+     * @param string $id id of the Purchase Link to read
+     * @return mixed Promise fulfilled with response json
+     */
+    public function read($id)
+    {
+        return $this->authenticator->refreshTemporaryCredentials()
+            ->then(
+                function (/*HttpResponse */$res) use ($id) {
+                    $resJson = json_decode($res->body, true);
+
+                    $this->log->info("Reading Purchase Link $id ...");
+
+                    return $this->client->signedRequest(
+                        PaydemicRequests::PURCHASE_LINKS_LIST_METHOD,
+                        $resJson["accessKeyId"],
+                        $resJson["secretAccessKey"],
+                        $resJson['sessionToken'],
+                        $resJson["expiration"],
+                        PaydemicRequests::PURCHASE_LINKS_LIST_PATH . "/$id",
+                        null
+                    );
+                },
+                function (/*HttpException */$he) {
+                    $this->log->err($he);
+                }
+            )
+            ->then(
+                function (/*HttpResponse */$res) {
+                    return json_decode($res->body, true);
+                }
+            );
+    }
+
+    /**
      * Lists all Purchase Links.
      * @return mixed Promise fulfilled with response json
      */
