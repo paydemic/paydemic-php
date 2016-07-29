@@ -45,13 +45,13 @@ class PaydemicPhpSdkTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertInstanceOf(
             '\Paydemic\PurchaseLinks',
-            self::$sdk->purchaseLinks
+            self::$sdk->PurchaseLinks
         );
     }
 
     public function testCreate()
     {
-        $res = self::$sdk->purchaseLinks->create(
+        $res = self::$sdk->PurchaseLinks->create(
             "https://haskell.org",
             "Haskell org",
             "USD",
@@ -69,7 +69,7 @@ class PaydemicPhpSdkTest extends \PHPUnit_Framework_TestCase
 
     public function testListAllAndReadOne()
     {
-        $res = self::$sdk->purchaseLinks->listAll()->wait();
+        $res = self::$sdk->PurchaseLinks->listAll()->wait();
         $nbPls = count($res);
         print("\nFound $nbPls Purchase Links.\n");
         $this->assertTrue(
@@ -77,7 +77,7 @@ class PaydemicPhpSdkTest extends \PHPUnit_Framework_TestCase
             "At least one Purchase Link should be found!"
         );
 
-        $firstPurchaseLink = self::$sdk->purchaseLinks->read($res[0]['id'])->wait();
+        $firstPurchaseLink = self::$sdk->PurchaseLinks->retrieve($res[0]['id'])->wait();
         print("\nFirst read purchase link:\n");
         print_r($firstPurchaseLink);
         print("\n");

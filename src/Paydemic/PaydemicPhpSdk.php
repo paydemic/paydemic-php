@@ -14,7 +14,7 @@ class PaydemicPhpSdk
     /**
      * @var PurchaseLinks
      */
-    public $purchaseLinks;
+    public $PurchaseLinks;
 
     public function __construct(
         $accessKeyId,
@@ -23,7 +23,7 @@ class PaydemicPhpSdk
     ) {
         $this->log = Logger::getLogger('PaydemicPhpSdk');
 
-        $this->purchaseLinks = new PurchaseLinks(
+        $this->PurchaseLinks = new PurchaseLinks(
             $accessKeyId,
             $secretAccessKey,
             new HttpClientBasedOnGuzzle(

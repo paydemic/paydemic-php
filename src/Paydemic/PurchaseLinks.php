@@ -90,11 +90,11 @@ class PurchaseLinks
     }
 
     /**
-     * Reads a Purchase Link.
+     * Retrieves a Purchase Link.
      * @param string $id id of the Purchase Link to read
      * @return mixed Promise fulfilled with response json
      */
-    public function read($id)
+    public function retrieve($id)
     {
         return $this->authenticator->refreshTemporaryCredentials()
             ->then(
