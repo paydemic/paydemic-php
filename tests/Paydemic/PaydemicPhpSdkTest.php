@@ -16,8 +16,6 @@ class PaydemicPhpSdkTest extends \PHPUnit_Framework_TestCase
         $credentials = self::loadCredentials();
 
         self::$sdk = new PaydemicPhpSdk(
-            'eu-west-1',
-            'account.devdemic.com',
             $credentials['accessKeyId'],
             $credentials['secretAccessKey']
         );
@@ -49,5 +47,41 @@ class PaydemicPhpSdkTest extends \PHPUnit_Framework_TestCase
             '\Paydemic\PurchaseLinks',
             self::$sdk->purchaseLinks
         );
+    }
+
+    public function testCreate()
+    {
+        $res = self::$sdk->purchaseLinks->create(
+            "https://haskell.org",
+            "Haskell org",
+            "USD",
+            4.0
+        )->wait();
+        print("\nCreate Purchase Link result:\n");
+        print_r($res);
+        print("\n");
+        $this->assertNotEmpty($res['id']);
+        $this->assertEquals('https://haskell.org', $res['finalUrl']);
+        $this->assertEquals('Haskell org', $res['title']);
+        $this->assertEquals('USD', $res['price']['currencyCode']);
+        $this->assertEquals(4, round($res['price']['amount']));
+    }
+
+    public function testListAllAndReadOne()
+    {
+        $res = self::$sdk->purchaseLinks->listAll()->wait();
+        $nbPls = count($res);
+        print("\nFound $nbPls Purchase Links.\n");
+        $this->assertTrue(
+            $nbPls > 0,
+            "At least one Purchase Link should be found!"
+        );
+
+        $firstPurchaseLink = self::$sdk->purchaseLinks->read($res[0]['id'])->wait();
+        print("\nFirst read purchase link:\n");
+        print_r($firstPurchaseLink);
+        print("\n");
+
+        $this->assertEquals($res[0]['id'], $firstPurchaseLink['id']);
     }
 }
