@@ -6,8 +6,6 @@
  */
 namespace Paydemic\Internal\HttpClient;
 
-use Aws\Credentials\Credentials;
-
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Handler\CurlHandler;
@@ -60,10 +58,7 @@ class HttpClientBasedOnGuzzle implements HttpClientInterface
 
     public function signedRequest(
         $method,
-        $key,
-        $secret,
-        $token,
-        $tokenExpires,
+        $credentials,
         $path,
         $body = null
     ) {
@@ -74,7 +69,7 @@ class HttpClientBasedOnGuzzle implements HttpClientInterface
                 [],
                 $body
             ),
-            new Credentials($key, $secret, $token, $tokenExpires)
+            $credentials
         );
         return $this->sendAsync($signedRequest);
     }

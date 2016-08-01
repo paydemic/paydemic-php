@@ -6,12 +6,12 @@
  */
 namespace Paydemic;
 
+use GuzzleHttp\Promise\PromiseInterface;
 use Paydemic\Internal\Authenticator;
 // use Paydemic\Internal\Exception\HttpException;
 use Paydemic\Internal\HttpClient\HttpClientInterface;
 // use Paydemic\Internal\HttpClient\HttpResponse;
 use Paydemic\Internal\Logger;
-use Paydemic\Internal\PaydemicRequests;
 
 class PurchaseLinks
 {
@@ -42,7 +42,7 @@ class PurchaseLinks
      * @param string $title    purchase link title
      * @param string $currency currency ISO code (RON, USD, EUR ...)
      * @param double $price    price of the purchase link
-     * @return array Promise fulfilled with the created Purchase Link:
+     * @return PromiseInterface Promise fulfilled with the created Purchase Link:
      * <pre>
      * [
      *      'id' => '0d64fc71-6950-4b48-9876-f380ae760b69'
@@ -62,22 +62,17 @@ class PurchaseLinks
     {
         return $this->authenticator->refreshTemporaryCredentials()
             ->then(
-                function (/*HttpResponse */$res) use (
+                function ($credentials) use (
                     $url,
                     $title,
                     $currency,
                     $price
                 ) {
-                    $resJson = json_decode($res->body, true);
-
                     $this->log->info("Creating Purchase Link ...");
 
                     return $this->client->signedRequest(
                         'POST',
-                        $resJson["accessKeyId"],
-                        $resJson["secretAccessKey"],
-                        $resJson['sessionToken'],
-                        $resJson["expiration"],
+                        $credentials,
                         '/api/purchaselinks',
                         json_encode(
                             [
@@ -106,7 +101,7 @@ class PurchaseLinks
     /**
      * Retrieves a Purchase Link.
      * @param string $id id of the Purchase Link to read
-     * @return array Promise fulfilled with the retrieved Purchase Link:
+     * @return PromiseInterface Promise fulfilled with the retrieved Purchase Link:
      * <pre>
      * [
      *      'id' => '0d64fc71-6950-4b48-9876-f380ae760b69'
@@ -126,17 +121,12 @@ class PurchaseLinks
     {
         return $this->authenticator->refreshTemporaryCredentials()
             ->then(
-                function (/*HttpResponse */$res) use ($id) {
-                    $resJson = json_decode($res->body, true);
-
+                function ($credentials) use ($id) {
                     $this->log->info("Reading Purchase Link $id ...");
 
                     return $this->client->signedRequest(
                         'GET',
-                        $resJson["accessKeyId"],
-                        $resJson["secretAccessKey"],
-                        $resJson['sessionToken'],
-                        $resJson["expiration"],
+                        $credentials,
                         "/api/purchaselinks/$id",
                         null
                     );
@@ -159,7 +149,7 @@ class PurchaseLinks
      * @param string $title    purchase link title
      * @param string $currency currency ISO code (RON, USD, EUR ...)
      * @param double $price    price of the purchase link
-     * @return array Promise fulfilled with the updated Purchase Link:
+     * @return PromiseInterface Promise fulfilled with the updated Purchase Link:
      * <pre>
      * [
      *      'id' => '0d64fc71-6950-4b48-9876-f380ae760b69'
@@ -179,23 +169,18 @@ class PurchaseLinks
     {
         return $this->authenticator->refreshTemporaryCredentials()
             ->then(
-                function (/*HttpResponse */$res) use (
+                function ($credentials) use (
                     $id,
                     $url,
                     $title,
                     $currency,
                     $price
                 ) {
-                    $resJson = json_decode($res->body, true);
-
                     $this->log->info("Updating Purchase Link $id ...");
 
                     return $this->client->signedRequest(
                         'PUT',
-                        $resJson["accessKeyId"],
-                        $resJson["secretAccessKey"],
-                        $resJson['sessionToken'],
-                        $resJson["expiration"],
+                        $credentials,
                         "/api/purchaselinks/$id",
                         json_encode(
                             [
@@ -224,7 +209,7 @@ class PurchaseLinks
     /**
      * Deletes a Purchase Link.
      * @param string $id id of the Purchase Link
-     * @return array Promise fulfilled with Purchase Link deletion status:
+     * @return PromiseInterface Promise fulfilled with Purchase Link deletion status:
      * <pre>
      * [
      *      'id' => '0d64fc71-6950-4b48-9876-f380ae760b69'
@@ -236,17 +221,12 @@ class PurchaseLinks
     {
         return $this->authenticator->refreshTemporaryCredentials()
             ->then(
-                function (/*HttpResponse */$res) use ($id) {
-                    $resJson = json_decode($res->body, true);
-
+                function ($credentials) use ($id) {
                     $this->log->info("Deleting Purchase Link $id ...");
 
                     return $this->client->signedRequest(
                         'DELETE',
-                        $resJson["accessKeyId"],
-                        $resJson["secretAccessKey"],
-                        $resJson['sessionToken'],
-                        $resJson["expiration"],
+                        $credentials,
                         "/api/purchaselinks/$id",
                         null
                     );
@@ -264,23 +244,18 @@ class PurchaseLinks
 
     /**
      * Lists all Purchase Links.
-     * @return array Promise fulfilled with the list of Purchase Links
+     * @return PromiseInterface Promise fulfilled with the list of Purchase Links
      */
     public function listAll()
     {
         return $this->authenticator->refreshTemporaryCredentials()
             ->then(
-                function (/*HttpResponse */$res) {
-                    $resJson = json_decode($res->body, true);
-
+                function ($credentials) {
                     $this->log->info('Listing Purchase Links ...');
 
                     return $this->client->signedRequest(
                         'GET',
-                        $resJson["accessKeyId"],
-                        $resJson["secretAccessKey"],
-                        $resJson['sessionToken'],
-                        $resJson["expiration"],
+                        $credentials,
                         '/api/purchaselinks',
                         null
                     );

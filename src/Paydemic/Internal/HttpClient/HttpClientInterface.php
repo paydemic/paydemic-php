@@ -6,6 +6,8 @@
  */
 namespace Paydemic\Internal\HttpClient;
 
+use Aws\Credentials\Credentials;
+
 interface HttpClientInterface
 {
     /**
@@ -23,21 +25,15 @@ interface HttpClientInterface
 
     /**
      * Sends a V4 signed request and returns a Promise/A+ (https://promisesaplus.com/)
-     * @param string $method       http method (GET, POST, PUT, DELETE ...)
-     * @param string $key          access key
-     * @param string $secret       secret key
-     * @param string $token        AWS session token
-     * @param int    $tokenExpires AWS session token expiration moment as UNIX timestamp
-     * @param string $path         path relative to base uri; pass '' (empty string) for no path
-     * @param string $body         request body
+     * @param string      $method      http method (GET, POST, PUT, DELETE ...)
+     * @param Credentials $credentials AWS credentials
+     * @param string      $path        path relative to base uri; pass '' (empty string) for no path
+     * @param string      $body        request body
      * @return mixed a "PromiseInterface" (according to the Promise/A+ standard)
      */
     public function signedRequest(
         $method,
-        $key,
-        $secret,
-        $token,
-        $tokenExpires,
+        $credentials,
         $path,
         $body = null
     );
