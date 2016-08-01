@@ -7,6 +7,14 @@ composer install
 composer test
 ```
 
+## Run static analysis tools, run tests with coverage and generate API Doc
+
+```
+composer build
+```
+
+After it finishes, have a look in the `build` folder.
+
 ## Add it as a dependency to your PHP project's _composer.json_
  
 ```
@@ -23,4 +31,7 @@ composer test
 ...
 ```
 
-**NOTE**: Check the _tests_ folder for examples
+
+## Usage examples
+
+Have a look intoo `tests/Paydemic/PaydemicPhpSdkTest.php`
