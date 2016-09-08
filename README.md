@@ -15,8 +15,20 @@ composer build
 
 After it finishes, have a look in the `build` folder.
 
-## Add it as a dependency to your PHP project's _composer.json_
+## Add it as a dependency to your PHP project
  
+### From Packagist
+
+Run the following in your project root folder:
+
+```
+composer require paydemic/paydemic-php-sdk
+```
+
+### From GitHub
+
+Edit your _composer.json_ file directly and add the following:
+
 ```
 ...
 "repositories": [
