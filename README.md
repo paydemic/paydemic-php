@@ -90,11 +90,11 @@ $paydemic->PurchaseLinks->delete($purchaseLink['id'])->wait();
 ### Available resources & methods
 
  * PurchaseLinks
-    * [`create($finalUrl, $title, $currencyCode, $price)`](https://github.com/paydemic/paydemic-php#create_purchaselink)
-    * [`retrieve($id)`](https://github.com/paydemic/paydemic-php#retrieve_purchaselink)
-    * [`listAll()`](https://github.com/paydemic/paydemic-php#list_purchaselink)
-    * [`update($id, $finalUrl, $title, $currencyCode, $price)`](https://github.com/paydemic/paydemic-php#update_purchaselink)
-    * [`delete($id)`](https://github.com/paydemic/paydemic-php#remove_purchaselink)
+    * [`create($finalUrl, $title, $currencyCode, $price)`](#create_purchaselink)
+    * [`retrieve($id)`](#retrieve_purchaselink)
+    * [`listAll()`](#list_purchaselink)
+    * [`update($id, $finalUrl, $title, $currencyCode, $price)`](#update_purchaselink)
+    * [`delete($id)`](#remove_purchaselink)
 
 
 ## Development
