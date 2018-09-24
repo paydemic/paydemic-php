@@ -2,9 +2,10 @@
 
 namespace Paydemic\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Paydemic\PaydemicPhpSdk;
 
-class PaydemicPhpSdkTest extends \PHPUnit_Framework_TestCase
+class PaydemicPhpSdkTest extends TestCase
 {
     /**
      * @var PaydemicPhpSdk
@@ -51,8 +52,8 @@ class PaydemicPhpSdkTest extends \PHPUnit_Framework_TestCase
 
     public function testCRUDL()
     {
-        $finalUrl = "https://haskell.org";
-        $title = "Haskell org";
+        $finalUrl = "https://paywalledsite.com/paid-access-article";
+        $title = "My paid access article title";
         $currencyCode = "USD";
         $price = 4.0;
 
@@ -111,6 +112,64 @@ class PaydemicPhpSdkTest extends \PHPUnit_Framework_TestCase
             $nbListed > 0,
             "At least one Purchase Link should be found by listAll()!"
         );
+
+        // test delete
+        $deleted = self::$sdk->PurchaseLinks->delete($id)->wait();
+        print("\nDeleted Purchase Link ${created['id']}:\n");
+        print_r($deleted);
+        $this->assertEquals($id, $deleted['id']);
+        $this->assertEquals('SUCCESS', $deleted['status']);
+    }
+
+    public function testCUDwithDescription()
+    {
+        $finalUrl = "https://paywalledsite.com/paid-access-article";
+        $title = "My paid access article title";
+        $currencyCode = "EUR";
+        $price = 2.0;
+        $description = "Extra information";
+
+        // test create
+        $created = self::$sdk->PurchaseLinks->create(
+            $finalUrl,
+            $title,
+            $currencyCode,
+            $price,
+            $description
+        )->wait();
+        print("\nCreated Purchase Link:\n");
+        print_r($created);
+        print("\n");
+        $id = $created['id'];
+        $this->assertNotEmpty($id);
+        $this->assertEquals($finalUrl, $created['finalUrl']);
+        $this->assertEquals($title, $created['title']);
+        $this->assertEquals($currencyCode, $created['price']['currencyCode']);
+        $this->assertEquals($price, round($created['price']['amount']));
+        $this->assertEquals($description, $created['description']);
+
+
+        // test update
+        $finalUrlUpdate = $finalUrl . '#updated';
+        $titleUpdate = $title . ' UPDATED';
+        $priceUpdate = 6.0;
+        $descriptionUpdate = $description . ' UPDATED';
+        $updated = self::$sdk->PurchaseLinks->update(
+            $id,
+            $finalUrlUpdate,
+            $titleUpdate,
+            $currencyCode,
+            $priceUpdate,
+            $descriptionUpdate
+        )->wait();
+        print("\nUpdated Purchase Link ${created['id']}:\n");
+        print_r($updated);
+        $this->assertEquals($id, $updated['id']);
+        $this->assertEquals($finalUrlUpdate, $updated['finalUrl']);
+        $this->assertEquals($titleUpdate, $updated['title']);
+        $this->assertEquals($currencyCode, $updated['price']['currencyCode']);
+        $this->assertEquals($priceUpdate, round($updated['price']['amount']));
+        $this->assertEquals($descriptionUpdate, $updated['description']);
 
         // test delete
         $deleted = self::$sdk->PurchaseLinks->delete($id)->wait();

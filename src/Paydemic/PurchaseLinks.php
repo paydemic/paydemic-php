@@ -40,25 +40,25 @@ class PurchaseLinks
      * Creates a Purchase Link.
      * @param string $url      url to be sold
      * @param string $title    purchase link title
-     * @param string $currency currency ISO code (RON, USD, EUR ...)
+     * @param string $currency currency ISO code (USD, EUR ...)
      * @param double $price    price of the purchase link
      * @return PromiseInterface Promise fulfilled with the created Purchase Link:
      * <pre>
      * [
      *      'id' => '0d64fc71-6950-4b48-9876-f380ae760b69'
-     *      'finalUrl' => 'https://haskell.org'
-     *      'title' => 'Haskell dot org'
+     *      'finalUrl' => 'https://paywalledsite.com/paid-access-article'
+     *      'title' => 'My paid access article title'
      *      'price' =>
      *      [
-     *          'currencyCode" => 'USD'
+     *          'currencyCode' => 'USD'
      *          'amount' => 4.00
      *      ]
      *      'purchaseUrl' => 'https://account.paydemic.com/buy/NLFDOPZ6U5EU5MRQISNVVGV6KI'
-     *      'creationDate' => '2016-07-29T21:15:42.113Z'
+     *      'creationDate' => '2018-07-29T21:15:42.113Z'
      * ]
      * </pre>
      */
-    public function create($url, $title, $currency, $price)
+    public function create($url, $title, $currency, $price, $description=null)
     {
         return $this->authenticator->refreshTemporaryCredentials()
             ->then(
@@ -66,7 +66,8 @@ class PurchaseLinks
                     $url,
                     $title,
                     $currency,
-                    $price
+                    $price,
+                    $description
                 ) {
                     $this->log->info("Creating Purchase Link ...");
 
@@ -82,7 +83,8 @@ class PurchaseLinks
                                 [
                                     'currencyCode' => $currency,
                                     'amount' => $price
-                                ]
+                                ],
+                                'description' => $description
                             ]
                         )
                     );
@@ -105,8 +107,8 @@ class PurchaseLinks
      * <pre>
      * [
      *      'id' => '0d64fc71-6950-4b48-9876-f380ae760b69'
-     *      'finalUrl' => 'https://haskell.org'
-     *      'title' => 'Haskell dot org'
+     *      'finalUrl' => 'https://paywalledsite.com/paid-access-article'
+     *      'title' => 'My paid access article title'
      *      'price' =>
      *      [
      *          'currencyCode" => 'USD'
@@ -153,8 +155,8 @@ class PurchaseLinks
      * <pre>
      * [
      *      'id' => '0d64fc71-6950-4b48-9876-f380ae760b69'
-     *      'finalUrl' => 'https://haskell.org'
-     *      'title' => 'Haskell dot org'
+     *      'finalUrl' => 'https://paywalledsite.com/paid-access-article'
+     *      'title' => 'My paid access article title'
      *      'price' =>
      *      [
      *          'currencyCode" => 'USD'
@@ -165,7 +167,7 @@ class PurchaseLinks
      * ]
      * </pre>
      */
-    public function update($id, $url, $title, $currency, $price)
+    public function update($id, $url, $title, $currency, $price, $description=null)
     {
         return $this->authenticator->refreshTemporaryCredentials()
             ->then(
@@ -174,7 +176,8 @@ class PurchaseLinks
                     $url,
                     $title,
                     $currency,
-                    $price
+                    $price,
+                    $description
                 ) {
                     $this->log->info("Updating Purchase Link $id ...");
 
@@ -190,7 +193,8 @@ class PurchaseLinks
                                     [
                                         'currencyCode' => $currency,
                                         'amount' => $price
-                                    ]
+                                    ],
+                                'description' => $description
                             ]
                         )
                     );

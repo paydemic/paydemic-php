@@ -22,16 +22,18 @@ so you don't have to use the regular callback. E.g.
 <a name="create_purchaselink"></a>
 ```php
 // Create a new purchase link:
-$finalUrl = "https://haskell.org";
-$title = "Haskell org";
+$finalUrl = "https://paywalledsite.com/paid-access-article";
+$title = "My paid access article title";
 $currencyCode = "USD";
 $price = 4.0;
+$description = "Extra information";
 
 $paydemic->PurchaseLinks->create(
     $finalUrl,
     $title,
     $currencyCode,
-    $price
+    $price,
+    $description
 )->then(
     // on success
     function ($purchaseLink) { /* some code */ },
@@ -70,13 +72,15 @@ $listed = $paydemic->PurchaseLinks->listAll()->wait();
 $finalUrlUpdate = $finalUrl . '#updated';
 $titleUpdate = $title . ' UPDATED';
 $priceUpdate = 6.0;
+$descriptionUpdate = $description . ' UPDATED';
 
 $updated = $paydemic->PurchaseLinks->update(
     $purchaseLink['id'],
     $finalUrlUpdate,
     $titleUpdate,
     $currencyCode,
-    $priceUpdate
+    $priceUpdate,
+    $descriptionUpdate
 )->wait();
 ```
 
@@ -90,10 +94,10 @@ $paydemic->PurchaseLinks->delete($purchaseLink['id'])->wait();
 ### Available resources & methods
 
  * PurchaseLinks
-    * [`create($finalUrl, $title, $currencyCode, $price)`](#create_purchaselink)
+    * [`create($finalUrl, $title, $currencyCode, $price, $description)`](#create_purchaselink)
     * [`retrieve($id)`](#retrieve_purchaselink)
     * [`listAll()`](#list_purchaselink)
-    * [`update($id, $finalUrl, $title, $currencyCode, $price)`](#update_purchaselink)
+    * [`update($id, $finalUrl, $title, $currencyCode, $price, $description)`](#update_purchaselink)
     * [`delete($id)`](#remove_purchaselink)
 
 

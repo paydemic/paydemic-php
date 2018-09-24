@@ -10,5 +10,6 @@ cache.properties
 build
 phpunit.xml
 composer.lock
+composer.*
 vendor/
 logs/*.*
